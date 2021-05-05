@@ -1,1 +1,1 @@
-while true; do ./curl_5000.sh; ./curl_8080.sh ; sleep 2; done
+while true; do ./curl_demo_5000.sh; sleep 2; done
