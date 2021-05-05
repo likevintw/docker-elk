@@ -19,7 +19,7 @@ services:
         target: /usr/share/logstash/pipeline
         read_only: true
     ports:
-      - "5001:5001"
+      - "3722:3722"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
