@@ -1,0 +1,30 @@
+version: '3.2'
+
+services:
+  logstash:
+    container_name: logstash
+    image: docker-elk_logstash
+    deploy:
+      resources:
+        limits:
+          cpus: '0.9'
+          memory: 2gb
+    volumes:
+      - type: bind
+        source: ./logstash/config/logstash.yml
+        target: /usr/share/logstash/config/logstash.yml
+        read_only: true
+      - type: bind
+        source: ./logstash/pipeline
+        target: /usr/share/logstash/pipeline
+        read_only: true
+    ports:
+      - "5000:5000"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - docker-elk_elk
+
+networks:
+  docker-elk_elk:
+    external: true
