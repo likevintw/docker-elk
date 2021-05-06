@@ -2,7 +2,7 @@ version: '3.2'
 
 services:
   logstash:
-    container_name: logstash
+    container_name: logstash_5000
     image: docker-elk_logstash
     deploy:
       resources:
@@ -19,12 +19,12 @@ services:
         target: /usr/share/logstash/pipeline
         read_only: true
     ports:
-      - "3722:3722"
+      - "5000:5000"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
-      - docker-elk_elk
+      - elk_elk
 
 networks:
-  docker-elk_elk:
+  elk_elk:
     external: true
