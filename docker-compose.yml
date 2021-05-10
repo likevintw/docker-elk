@@ -41,6 +41,11 @@ services:
       context: logstash/
       args:
         ELK_VERSION: $ELK_VERSION
+        deploy:
+    resources:
+      limits:
+        cpus: '0.5'
+        memory: 8b
     volumes:
       - type: bind
         source: ./logstash/config/logstash.yml
@@ -64,6 +69,10 @@ services:
       context: kibana/
       args:
         ELK_VERSION: $ELK_VERSION
+        resources:
+    limits:
+      cpus: '0.5'
+      memory: 8b
     volumes:
       - type: bind
         source: ./kibana/config/kibana.yml
