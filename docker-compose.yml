@@ -6,6 +6,11 @@ services:
       context: elasticsearch/
       args:
         ELK_VERSION: $ELK_VERSION
+    deploy:
+      resources:
+        limits:
+          cpus: '0.9'
+          memory: 30gb
     volumes:
       - type: bind
         source: ./elasticsearch/config/elasticsearch.yml
@@ -18,11 +23,16 @@ services:
       - "9200:9200"
       - "9300:9300"
     environment:
-      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ES_JAVA_OPTS: "-Xmx512m -Xms512m" # 256 crashed
       ELASTIC_PASSWORD: changeme
       # Use single node discovery in order to disable production mode and avoid bootstrap checks.
       # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
       discovery.type: single-node
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100k"  
+        max-file: "100"   
     networks:
       - elk
 
@@ -43,7 +53,7 @@ services:
     ports:
       - "3721:3721"
     environment:
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      LS_JAVA_OPTS: "-Xmx512m -Xmx512m"
     networks:
       - elk
     depends_on:
