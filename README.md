@@ -10,7 +10,8 @@
   * docker-elk/docker-compose.yml
     - updated docker-compose port 3721 setting
     - no CPU Memory etc. limitation in docker-compose
-    - create docker network docker-elk_elk
+    - create docker network elk
+    - elastic -Xmx256m up to -Xmx256m
 
 * added a logstash_3722
   - must distribute in manual
@@ -20,7 +21,7 @@
   * docker-elk/logstash_extension/docker-compose.yml
     - updated docker-compose port 3722 setting
     - CPU Memory limitation in docker-compose, triggler with run.sh
-    - connect docker network docker-elk_elk
+    - connect docker network elk_elk
   
 * added a logstash_5000
   - must distribute in manual
@@ -31,4 +32,5 @@
   * docker-elk/logstash_extension/docker-compose.yml
     - updated docker-compose port 5000 setting
     - CPU Memory limitation in docker-compose, triggler with run.sh
-    - connect docker network docker-elk_elk
+    - connect docker network elk_elk
+    
