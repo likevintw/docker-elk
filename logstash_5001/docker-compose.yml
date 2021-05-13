@@ -7,11 +7,10 @@ services:
       args:
         ELK_VERSION: $ELK_VERSION
     container_name: logstash_5001
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 2gb
+    cpus: 0.5
+    mem_limit: 1000000
+    memswap_limit: 2000000
+    mem_reservation: 128m
     blkio_config:
       device_read_bps:
         - path: /dev/sda1
