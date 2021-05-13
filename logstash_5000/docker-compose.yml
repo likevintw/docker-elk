@@ -3,7 +3,7 @@ version: '3.2'
 services:
   logstash:
     container_name: logstash_5000
-    image: docker-elk_logstash
+    image: docker-elk_logstash:7.12.0
     deploy:
       resources:
         limits:
