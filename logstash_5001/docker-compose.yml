@@ -2,13 +2,29 @@ version: '3.2'
 
 services:
   logstash:
+    build:
+      context: elasticsearch/
+      args:
+        ELK_VERSION: $ELK_VERSION
     container_name: logstash_5001
-    image: docker-elk_logstash:7.12.0
     deploy:
       resources:
         limits:
           cpus: '0.5'
           memory: 2gb
+    blkio_config:
+      device_read_bps:
+        - path: /dev/sda1
+          rate: '12mb'
+      device_read_iops:
+        - path: /dev/sda1
+          rate: 120
+      device_write_bps:
+        - path: /dev/sda1
+          rate: '1024k'
+      device_write_iops:
+        - path: /dev/sda1
+          rate: 30
     volumes:
       - type: bind
         source: ./logstash/config/logstash.yml
